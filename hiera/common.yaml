@@ -3,6 +3,8 @@
 
 #vhost_name:
 project_config_repo:
+
+gearman_server: 172.130.0.141
 #serveradmin:
 jenkins_username:
 jenkins_password:
