@@ -88,6 +88,8 @@ node 'log.cibook.oz' {
     swift_tenant_name       => hiera('swift_tenant_name', ''),
     swift_region_name       => hiera('swift_region_name', ''),
     swift_default_container => hiera('swift_default_container', ''),
+  }
+}
 
 node 'zuul' {
   $vhost_name = hiera('vhost_name_zuul', $::fqdn)
@@ -111,5 +113,28 @@ node 'zuul' {
     smtp_default_to             => hiera('smtp_default_to', "zuul.reports@${vhost_name}"),
     zuul_revision               => hiera('zuul_revision', 'master'),
     zuul_git_source_repo        => hiera('zuul_git_source_repo', 'http://opnfv.zte.com.cn/gerrit/openstack/zuul'),
+  }
+}
+
+
+
+node 'elk' {
+
+  $elasticsearch_nodes = [ hiera('vhost_name_elk') ]
+
+  class { 'cibook_project::logstash':
+    discover_nodes      => [ hiera('vhost_name_elk'):9200 ]
+  }
+
+  class { 'cibook_project::logstash_worker':
+    discover_node         => hiera('vhost_name_elk'),
+    enable_mqtt           => false,
+    mqtt_hostname         => hiera('vhost_name_elk'),
+    mqtt_password         => '',
+    mqtt_ca_cert_contents => '',
+  }
+
+  class { 'cibook_project::elasticsearch_node':
+    discover_nodes => $elasticsearch_nodes
   }
 }

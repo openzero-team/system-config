@@ -1,0 +1,19 @@
+source-url: http://log.cibook.oz
+
+# List of zmq event inputs.
+zmq-publishers:
+  - tcp://jenkins.cibook.oz:8888
+
+subunit-files: []
+# List of files to source logs from.
+source-files:
+  - name: console.html
+    retry-get: True
+    tags:
+      - console
+  - name: logs/syslog.txt
+    tags:
+      - syslog
+  - name: logs/libvirtd.txt
+    tags:
+      - libvirt
