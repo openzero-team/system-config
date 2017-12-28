@@ -4,7 +4,20 @@
 #vhost_name:
 project_config_repo:
 
-gearman_server: 172.130.0.141
+#nodes
+vhost_name_common:    common.cibook.oz
+vhost_name_elk:       elk.cibook.oz
+vhost_name_gearman:   gearman.cibook.oz
+vhost_name_gerrit:    gerrit.cibook.oz
+vhost_name_jenkins:   jenkins.cibook.oz
+vhost_name_log:       log.cibook.oz
+vhost_name_nodepool:  nodepool.cibook.oz
+vhost_name_zookeeper: zookeeper.cibook.oz
+vhost_name_zuul:      zuul.cibook.oz
+
+#configuration for log server
+domain:               log.cibook.oz
+
 #serveradmin:
 jenkins_username:
 jenkins_password:
@@ -78,8 +91,6 @@ jenkins_credentials_id: # jenkins api key get from Jenkins
 nodepool_revision:
 nodepool_git_source_repo: # replace with local repo
 
-#configuration for log server
-domain: log.cibook.com
 #jenkins_ssh_public_key:  your-jenkins-public-key-no-whitespace
 #swift_authurl:
 #swift_user:
