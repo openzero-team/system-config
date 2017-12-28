@@ -1,0 +1,4 @@
+[gerrit]
+host=opnfv.zte.com.cn
+project=system-config.git
+defaultremote=origin
