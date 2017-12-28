@@ -54,8 +54,7 @@ node 'jenkins' {
 
 }
 
-
-node 'log.cibook.com' {
+node 'log.cibook.oz' {
   class { '::openstackci::logserver':
     domain                  => hiera('domain'),
     jenkins_ssh_key         => hiera('jenkins_ssh_public_key'),
@@ -65,5 +64,28 @@ node 'log.cibook.com' {
     swift_tenant_name       => hiera('swift_tenant_name', ''),
     swift_region_name       => hiera('swift_region_name', ''),
     swift_default_container => hiera('swift_default_container', ''),
+
+node 'zuul' {
+  $vhost_name = hiera('vhost_name_zuul', $::fqdn)
+
+  class { '::openstackci::zuul_node':
+    vhost_name                  => $vhost_name,
+    project_config_repo         => hiera('project_config_repo'),
+    gearman_server              => hiera('gearman_server'),
+    gerrit_server               => hiera('gerrit_server', 'gerrit.cibook.com'),
+    gerrit_user                 => hiera('gerrit_user'),
+    gerrit_user_http_passwd     => hiera('gerrit_user_http_passwd'),
+    gerrit_user_ssh_public_key  => hiera('gerrit_user_ssh_public_key'),
+    gerrit_user_ssh_private_key => hiera('gerrit_user_ssh_private_key'),
+    gerrit_ssh_host_key         => hiera('gerrit_ssh_host_key'),
+    git_email                   => hiera('git_email'),
+    git_name                    => hiera('git_name'),
+    log_server                  => hiera('log_server'),
+    log_server_public           => hiera('log_server_public'),
+    smtp_host                   => hiera('smtp_host', 'localhost'),
+    smtp_default_from           => hiera('smtp_default_from', "zuul@${vhost_name}"),
+    smtp_default_to             => hiera('smtp_default_to', "zuul.reports@${vhost_name}"),
+    zuul_revision               => hiera('zuul_revision', 'master'),
+    zuul_git_source_repo        => hiera('zuul_git_source_repo', 'http://opnfv.zte.com.cn/gerrit/openstack/zuul'),
   }
 }
