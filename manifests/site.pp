@@ -2,6 +2,13 @@ node "common-gearman.openstacklocal" {
     class { 'gearman': }
 }
 
+node "common-zk.openstacklocal" {
+  class { 'zookeeper':
+    install_java => true,
+    java_package => 'openjdk-7-jre-headless',
+  }
+}
+
 node "gerrit" {
   package { 'ssl-cert':
     ensure => present,
