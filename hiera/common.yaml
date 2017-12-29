@@ -18,12 +18,38 @@ vhost_name_elk:        elk.cibook.oz
 
 domain:               log.cibook.oz
 #serveradmin:
-jenkins_username:
-jenkins_password:
+jenkins_username: cibook
+jenkins_password: cibook
 jenkins_ssh_private_key: |
-                         -----BEGIN RSA PRIVATE KEY-----
-                         -----END RSA PRIVATE KEY-----
-jenkins_ssh_public_key: # only fill with the body of public key
+  -----BEGIN RSA PRIVATE KEY-----
+  MIIEogIBAAKCAQEAuWmUthLYDhvFvvz4xt4ax0w6WFlpeJz+fXCJ5vbfJmI8beNi
+  8XdlflHCpbpEZ+9p06SpNwu4ImiwTBKvu41T7H0lTU5sMWKczzIgbyYfwwsUcVSu
+  knoVW1iys91nvnldiXvFrURhaMaxqCDGvUNdTMfOknCllc6rySzv3TwFWeqH/OMf
+  JvUevIY9LMebr7KvFyC7IjlfgO9TwBwr0YcCfJC9SpAb8f7YBgSQEv0aDEIF10l5
+  3kWKofJqxrzoaLgmJN09Vd7F3gnifQ1IbyJXg1iAtqkYPrt0tTVo4l+PhIiViL62
+  7KWfS5TGx8rD3cCo2AhwmOn+0EEnCp3JUfZ+lQIDAQABAoIBAFNFwg6MJBEiFAwV
+  Hb5jXm+IIuQvNBmBmSLJeoYK9moM0Mshxvxf/WtgWSWJpNNxSXxOhdk9IDQEBLoF
+  4ns/nCOoiSpRQHJlsbu07bA91SIKReIogEc1IYZnLctucvuvEn1+42dQQNeH9Z5n
+  KhsyuCKV0ocepJ/FtI2j6w7XuCeLU+yOwUT8oAgy8bYVPKCq3oYvoI9SGotnMnqg
+  lRhPJIasPH0j+e/pQspDD8TV2OB9gN8G8Hcmb4t3EVB5JI+bU3Me3dROReJX6LEO
+  FRVTRF53zIO6p5ITvRDCLdzmeI5q1MCWENPpaLcXlrtR78UJSs1aczCY2g4dnmOK
+  EPCPRgECgYEA6LBdbwxjWWYFEU+TBdPIggxTVNiyNLoSbVFjR+ABscVvKokFYY8n
+  rvCvPJbo2Rgb3PHQ/le3h7oqSlBayR5u9JIx/8HQXJnfO4j1zNiQye/1M8ek/qOV
+  Lrj06FZjUV9XVy1XKwsZWaMhG3OfqDywyt1otgYQ7qCDHuEHKxS2ntUCgYEAy/y+
+  WCzRSbkSnEcvGY5oXX682b745VLOg/8gAm3JmadQBlmn483gwZ93k4iN984wsG6z
+  Q54m1iHFVjvhZC9Fz1KrplZbGnrJyeQvpJxA7jlMavGh6YU0BdQuSMl0sH3Fss2h
+  HG60gD1Qdq8eyGvOntSAPUlsg4GEsa698ZcFwMECgYAPDdn9pT+IOSF6zTsl1V3T
+  jBiYFKzy3Fb0258gt01kwvE+Pz8p4KkgmFG+CcVmxjiHQt3Slro4/cJerHQzLtTe
+  3dZ+RXvFge7/Ww0MA7baWbvzbacvEkZEj5LItU4XpaNw8G4DSuSI+BTcQc7Cg6qs
+  dUahACN4TMou5UAheWWXQQKBgD+UgJOlLHqJF/bj7RdPHtJ9bUmFT7jSrZHQ1F5N
+  b/fXgYbpLP5BLlvLY471kiJ5/w0PBAsAYWR+1C5DrcX3QhAT2XKYGf9P5FNsLzlk
+  hox6CYqP1AKgRQ3IC8EeIaPdH+DSXPQqwVHzSoAjpzma+KTi4TG5D/yRQxXKvGNv
+  yhhBAoGAGiIJr7GB/D3iBV1pIbZbGPGUq2MokE9zmo+5xnjBOFxRm8Qom2E/c7Vy
+  bFXgydPE12epkVLA/PFuKqEhZvvGHPJLjwg0Cuk/7HjMlOsNPY0dpDXUk3ZhltO9
+  DZZn3nzmfuMNLnZrbMAOA8JMSm/Rk+Ce9E4kWHnqqN9uDpncDVI=
+  -----END RSA PRIVATE KEY-----
+
+jenkins_ssh_public_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQC5aZS2EtgOG8W+/PjG3hrHTDpYWWl4nP59cInm9t8mYjxt42Lxd2V+UcKlukRn72nTpKk3C7giaLBMEq+7jVPsfSVNTmwxYpzPMiBvJh/DCxRxVK6SehVbWLKz3We+eV2Je8WtRGFoxrGoIMa9Q11Mx86ScKWVzqvJLO/dPAVZ6of84x8m9R68hj0sx5uvsq8XILsiOV+A71PAHCvRhwJ8kL1KkBvx/tgGBJAS/RoMQgXXSXneRYqh8mrGvOhouCYk3T1V3sXeCeJ9DUhvIleDWIC2qRg+u3S1NWjiX4+EiJWIvrbspZ9LlMbHysPdwKjYCHCY6f7QQScKnclR9n6V
 
 #gerrit_ssh_host_key:
 gerrit_user:
@@ -94,8 +120,8 @@ mysql_gerrit_user: gerrit2
 mysql_gerrit_password: 12345
 
 nodepool_jenkins_target:
-jenkins_api_key: # jenkins api key get from Jenkins
-jenkins_credentials_id: # jenkins api key get from Jenkins
+jenkins_api_key: 31a5ae595ba5ce364df264bac70e54c0 # jenkins api key get from Jenkins
+jenkins_credentials_id: 9c72e2be-25c9-4233-a2ac-4dc8664312a4 # jenkins api key get from Jenkins
 nodepool_revision:
 nodepool_git_source_repo: # replace with local repo
 
