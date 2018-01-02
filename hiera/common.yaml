@@ -77,3 +77,13 @@ jenkins_api_key: # jenkins api key get from Jenkins
 jenkins_credentials_id: # jenkins api key get from Jenkins
 nodepool_revision:
 nodepool_git_source_repo: # replace with local repo
+
+#configuration for log server
+domain: log.cibook.com
+#jenkins_ssh_public_key:  your-jenkins-public-key-no-whitespace
+#swift_authurl:
+#swift_user:
+#swift_key:
+#swift_tenant_name:
+#swift_region_name:
+#swift_default_container:

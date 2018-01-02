@@ -53,3 +53,17 @@ node 'jenkins' {
   }
 
 }
+
+
+node 'log.cibook.com' {
+  class { '::openstackci::logserver':
+    domain                  => hiera('domain'),
+    jenkins_ssh_key         => hiera('jenkins_ssh_public_key'),
+    swift_authurl           => hiera('swift_authurl', ''),
+    swift_user              => hiera('swift_user', ''),
+    swift_key               => hiera('swift_key', ''),
+    swift_tenant_name       => hiera('swift_tenant_name', ''),
+    swift_region_name       => hiera('swift_region_name', ''),
+    swift_default_container => hiera('swift_default_container', ''),
+  }
+}
