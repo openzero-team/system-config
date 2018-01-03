@@ -3,10 +3,27 @@ node "common-gearman.openstacklocal" {
 }
 
 node "common-zk.openstacklocal" {
+  $vhost_name = hiera('vhost_name_common', $::fqdn)
+
+  class { '::cibook_project::common_nodepool_db':
+    vhost_name                  => $vhost_name,
+    mysql_bind_address          => hiera('mysql_bind_address'),
+    mysql_root_password         => hiera('mysql_root_password'),
+    mysql_nodepool_password     => hiera('mysql_nodepool_password'),
+  }
+
+  class { '::cibook_project::common_gerrit_db':
+    mysql_root_password    => hiera('mysql_gerrit_root_password'),
+    database_name          => hiera('mysql_gerrit_name'),
+    database_user          => hiera('mysql_gerrit_user'),
+    database_password      => hiera('mysql_gerrit_password'),
+  }
+
   class { 'zookeeper':
     install_java => true,
     java_package => 'openjdk-7-jre-headless',
   }
+
 }
 
 node "gerrit" {

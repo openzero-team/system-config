@@ -70,8 +70,17 @@ oscc_file_contents: |
                               - name: net-ci
                                 nat_destination: true
                                 default_interface: true
-mysql_root_password:
-mysql_nodepool_password:
+#nodepool mysql db config:
+mysql_bind_address: '0.0.0.0'
+mysql_root_password: root123
+mysql_nodepool_password: root123
+
+#gerrit mysql db config:
+mysql_gerrit_root_password: UNSET
+mysql_gerrit_name: reviewdb
+mysql_gerrit_user: gerrit2
+mysql_gerrit_password: 12345
+
 nodepool_jenkins_target:
 jenkins_api_key: # jenkins api key get from Jenkins
 jenkins_credentials_id: # jenkins api key get from Jenkins
