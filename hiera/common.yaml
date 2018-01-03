@@ -1,23 +1,22 @@
 # See parameter documentation inside ../manifests/single_node_ci.pp
 # Fields commented out have reasonable default values
 
+#project config repo:
+project_config_repo: http://opnfv.zte.com.cn/gerrit/infra/project-config
+
 #vhost_name:
-project_config_repo:
+vhost_name_master:     master.cibook.oz
+vhost_name_gerrit:     gerrit.cibook.oz
+vhost_name_zuul:       zuul.cibook.oz
+vhost_name_jenkins:    jenkins.cibook.oz
+vhost_name_nodepool:   nodepool.cibook.oz
+vhost_name_mysql:      mysql.cibook.oz
+vhost_name_zookeeper:  zookeeper.cibook.oz
+vhost_name_gearman:    gearman.cibook.oz
+vhost_name_log_server: log.cibook.oz
+vhost_name_elk:        elk.cibook.oz
 
-#nodes
-vhost_name_common:    common.cibook.oz
-vhost_name_elk:       elk.cibook.oz
-vhost_name_gearman:   gearman.cibook.oz
-vhost_name_gerrit:    gerrit.cibook.oz
-vhost_name_jenkins:   jenkins.cibook.oz
-vhost_name_log:       log.cibook.oz
-vhost_name_nodepool:  nodepool.cibook.oz
-vhost_name_zookeeper: zookeeper.cibook.oz
-vhost_name_zuul:      zuul.cibook.oz
-
-#configuration for log server
 domain:               log.cibook.oz
-
 #serveradmin:
 jenkins_username:
 jenkins_password:
@@ -25,7 +24,7 @@ jenkins_ssh_private_key: |
                          -----BEGIN RSA PRIVATE KEY-----
                          -----END RSA PRIVATE KEY-----
 jenkins_ssh_public_key: # only fill with the body of public key
-gerrit_server:
+
 #gerrit_ssh_host_key:
 gerrit_user:
 gerrit_user_ssh_private_key: |
