@@ -110,6 +110,31 @@ node 'zuul' {
   }
 }
 
+node 'nodepool.cibook.oz' {
+
+    # If the fqdn is not resolvable, use its ip address
+  $vhost_name = hiera('vhost_name_nodepool', $::fqdn)
+
+  class { '::cibook_project::nodepool_node':
+    vhost_name                  => $vhost_name,
+    project_config_repo         => hiera('project_config_repo'),
+    jenkins_username            => hiera('jenkins_username', 'jenkins'),
+    jenkins_ssh_public_key      => hiera('jenkins_ssh_public_key'),
+    jenkins_ssh_private_key     => hiera('jenkins_ssh_private_key'),
+    oscc_file_contents          => hiera('oscc_file_contents', ''),
+    mysql_host                  => hiera('vhost_name_mysql'),
+    mysql_root_password         => hiera('mysql_root_password'),
+    mysql_nodepool_password     => hiera('mysql_nodepool_password'),
+    nodepool_jenkins_target     => hiera('nodepool_jenkins_target', 'jenkins-cibook'),
+    jenkins_api_key             => hiera('jenkins_api_key', 'XXX'),
+    jenkins_credentials_id      => hiera('jenkins_credentials_id', 'XXX'),
+    jenkins_url                 => hiera('jenkins_url', 'http://jenkins.cibook.oz:8080'),
+    nodepool_revision           => hiera('nodepool_revision', 'master'),
+    nodepool_git_source_repo    => hiera('nodepool_git_source_repo',
+      'http://opnfv.zte.com.cn/gerrit/openstack/nodepool'),
+  }
+
+}
 
 
 node 'elk' {
