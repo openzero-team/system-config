@@ -16,7 +16,6 @@ vhost_name_gearman:    gearman.cibook.oz
 vhost_name_log_server: log.cibook.oz
 vhost_name_elk:        elk.cibook.oz
 
-domain:               log.cibook.oz
 #serveradmin:
 jenkins_username:
 jenkins_password:
@@ -99,6 +98,7 @@ jenkins_credentials_id: # jenkins api key get from Jenkins
 nodepool_revision:
 nodepool_git_source_repo: # replace with local repo
 
+domain: cibook.oz
 #jenkins_ssh_public_key:  your-jenkins-public-key-no-whitespace
 #swift_authurl:
 #swift_user:
