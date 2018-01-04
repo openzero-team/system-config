@@ -28,6 +28,8 @@ node "common-zk.openstacklocal" {
 
 node "gerrit" {
 
+  $vhost_name = hiera('vhost_name_gerrit', $::fqdn)
+
   package { 'ssl-cert':
     ensure => present,
   }
@@ -42,10 +44,14 @@ node "gerrit" {
   }
 
   class { 'gerrit':
-    manage_jeepyb                       => false,
     mysql_host                          => hiera('vhost_name_mysql'),
     mysql_password                      => hiera('mysql_gerrit_password'),
+    vhost_name                          => $vhost_name,
+    redirect_to_canonicalweburl         => false,
+    canonicalweburl                     => https://$vhost_name,
     war                                 => 'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.9.4.5.73392ca.war',
+    gerrit_auth_type                    => 'DEVELOPMENT_BECOME_ANY_ACCOUNT',
+    manage_jeepyb                       => false,
   }
 }
 
