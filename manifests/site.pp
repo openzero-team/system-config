@@ -27,6 +27,7 @@ node "common-zk.openstacklocal" {
 }
 
 node "gerrit" {
+
   package { 'ssl-cert':
     ensure => present,
   }
@@ -40,17 +41,10 @@ node "gerrit" {
     ensure => present,
   }
 
-  class { 'gerrit::mysql':
-    mysql_root_password => 'UNSET',
-    database_name       => 'reviewdb',
-    database_user       => 'gerrit2',
-    database_password   => '12345',
-  }
-
   class { 'gerrit':
     manage_jeepyb                       => false,
-    mysql_host                          => 'localhost',
-    mysql_password                      => '12345',
+    mysql_host                          => hiera('vhost_name_mysql'),
+    mysql_password                      => hiera('mysql_gerrit_password'),
     war                                 => 'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.9.4.5.73392ca.war',
   }
 }
