@@ -65,48 +65,49 @@ log_server: # opnfv.zte.com.cn
 zuul_revision:
 zuul_git_source_repo: # replace with local repo
 oscc_file_contents: |
-                    # Do Not Edit - Generated & Managed by Puppet
-                    #
-                    # Insert OSCC file contents here as explained in the
-                    # documentation so that nodepool is able to
-                    # authenticate to your cloud(s)
-                    client:
-                      force_ipv4: true
-                    clouds:
-                      zte-pod13:
-                        profile: internap
-                        floating_ip_source: 'neutron'
-                        auth:
-                          username: 'ciuser'
-                          password: 'ciuser'
-                          project_name: 'ciuser'
-                          auth_url: 'http://h13.oz:5000/v2.0'
-                        regions:
-                          - name: RegionOne
-                            values:
-                              networks:
-                              - name: admin_floating_net
-                                routes_externally: true
-                              - name: net-ci
-                                nat_destination: true
-                                default_interface: true
-                      zte-pod11:
-                        profile: internap
-                        floating_ip_source: 'neutron'
-                        auth:
-                          username: 'ciuser'
-                          password: 'ciuser'
-                          project_name: 'ciuser'
-                          auth_url: 'http://h11.oz:5000/v2.0'
-                        regions:
-                          - name: RegionOne
-                            values:
-                              networks:
-                              - name: admin_floating_net
-                                routes_externally: true
-                              - name: net-ci
-                                nat_destination: true
-                                default_interface: true
+  # Do Not Edit - Generated & Managed by Puppet
+  #
+  # Insert OSCC file contents here as explained in the
+  # documentation so that nodepool is able to
+  # authenticate to your cloud(s)
+  client:
+    force_ipv4: true
+  clouds:
+    zte-pod13:
+      profile: internap
+      floating_ip_source: 'neutron'
+      auth:
+        username: 'cibook'
+        password: 'cibook'
+        project_name: 'cibook'
+        auth_url: 'http://h13.oz:5000/v2.0'
+      regions:
+        - name: RegionOne
+          values:
+            networks:
+            - name: admin_floating_net
+              routes_externally: true
+            - name: net-ci
+              nat_destination: true
+              default_interface: true
+    zte-pod11:
+      profile: internap
+      floating_ip_source: 'neutron'
+      auth:
+        username: 'cibook'
+        password: 'cibook'
+        project_name: 'cibook'
+        auth_url: 'http://h11.oz:5000/v2.0'
+      regions:
+        - name: RegionOne
+          values:
+            networks:
+            - name: admin_floating_net
+              routes_externally: true
+            - name: net-ci
+              nat_destination: true
+              default_interface: true
+
 #nodepool mysql db config:
 mysql_bind_address: '0.0.0.0'
 mysql_root_password: root123
