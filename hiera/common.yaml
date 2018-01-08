@@ -111,6 +111,7 @@ oscc_file_contents: |
 #nodepool mysql db config:
 mysql_bind_address: '0.0.0.0'
 mysql_root_password: root123
+mysql_nodepool_db_name: nodepool
 mysql_nodepool_password: root123
 
 #gerrit mysql db config:
@@ -119,11 +120,11 @@ mysql_gerrit_name: reviewdb
 mysql_gerrit_user: gerrit2
 mysql_gerrit_password: 12345
 
-nodepool_jenkins_target:
+nodepool_jenkins_target: jenkins-cibook
 jenkins_api_key: 31a5ae595ba5ce364df264bac70e54c0 # jenkins api key get from Jenkins
 jenkins_credentials_id: 9c72e2be-25c9-4233-a2ac-4dc8664312a4 # jenkins api key get from Jenkins
-nodepool_revision:
-nodepool_git_source_repo: # replace with local repo
+nodepool_revision: dev
+nodepool_git_source_repo: http://opnfv.zte.com.cn/gerrit/openstack/nodepool
 
 domain: cibook.oz
 #jenkins_ssh_public_key:  your-jenkins-public-key-no-whitespace

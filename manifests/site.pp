@@ -130,6 +130,7 @@ node 'nodepool.cibook.oz' {
     oscc_file_contents          => hiera('oscc_file_contents', ''),
     mysql_host                  => hiera('vhost_name_mysql'),
     mysql_root_password         => hiera('mysql_root_password'),
+    mysql_db_name               => hiera('mysql_nodepool_db_name', 'nodepool'),
     mysql_nodepool_password     => hiera('mysql_nodepool_password'),
     nodepool_jenkins_target     => hiera('nodepool_jenkins_target', 'jenkins-cibook'),
     jenkins_api_key             => hiera('jenkins_api_key', 'XXX'),
