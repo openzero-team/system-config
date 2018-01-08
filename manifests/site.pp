@@ -1,8 +1,8 @@
-node "common-gearman.openstacklocal" {
+node "gearman.cibook.oz" {
     class { 'gearman': }
 }
 
-node "common-zk.openstacklocal" {
+node "zookeeper.cibook.oz" {
   $vhost_name = hiera('vhost_name_common', $::fqdn)
 
   class { '::cibook_project::common_nodepool_db':
@@ -26,7 +26,7 @@ node "common-zk.openstacklocal" {
 
 }
 
-node "gerrit" {
+node "gerrit.cibook.oz" {
 
   $vhost_name = hiera('vhost_name_gerrit', $::fqdn)
 
@@ -55,7 +55,7 @@ node "gerrit" {
   }
 }
 
-node 'jenkins' {
+node 'jenkins.cibook.oz' {
 
   $vhost_name = hiera('vhost_name_jenkins', $::fqdn)
 
@@ -91,7 +91,7 @@ node 'log.cibook.oz' {
   }
 }
 
-node 'zuul' {
+node 'zuul.cibook.oz' {
   $vhost_name = hiera('vhost_name_zuul', $::fqdn)
 
   class { '::openstackci::zuul_node':
@@ -143,7 +143,7 @@ node 'nodepool.cibook.oz' {
 }
 
 
-node 'elk' {
+node 'elk.cibook.oz' {
 
   $elasticsearch_nodes = [ hiera('vhost_name_elk') ]
 
