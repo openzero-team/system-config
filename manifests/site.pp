@@ -48,7 +48,7 @@ node "gerrit.cibook.oz" {
     mysql_password                      => hiera('mysql_gerrit_password'),
     vhost_name                          => $vhost_name,
     redirect_to_canonicalweburl         => false,
-    canonicalweburl                     => https://$vhost_name,
+    canonicalweburl                     => "https://$vhost_name",
     war                                 => 'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.9.4.5.73392ca.war',
     gerrit_auth_type                    => 'DEVELOPMENT_BECOME_ANY_ACCOUNT',
     manage_jeepyb                       => false,
@@ -148,7 +148,7 @@ node 'elk.cibook.oz' {
   $elasticsearch_nodes = [ hiera('vhost_name_elk') ]
 
   class { 'cibook_project::logstash':
-    discover_nodes      => [ hiera('vhost_name_elk'):9200 ]
+    discover_nodes      => [ "hiera('vhost_name_elk'):9200" ]
   }
 
   class { 'cibook_project::logstash_worker':
