@@ -1,0 +1,4 @@
+---
+domainname: "cibook.oz"
+# true or false
+autosign: true
