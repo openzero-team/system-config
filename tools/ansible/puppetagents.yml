@@ -1,7 +1,6 @@
 ---
 - hosts: puppet-agent
   become: yes
-  gather_facts: yes
   roles:
     - puppet-node
     - puppetagent
