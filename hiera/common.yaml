@@ -58,7 +58,7 @@ gerrit_user_ssh_private_key: |
 gerrit_user_ssh_public_key: # only fill with the body of public key
 git_email:
 git_name:
-log_server: # opnfv.zte.com.cn
+log_server: log.cibook.oz
 #smtp_host:
 #smtp_default_from:
 #smtp_default_to:
