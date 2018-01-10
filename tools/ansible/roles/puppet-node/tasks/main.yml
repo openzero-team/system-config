@@ -1,18 +1,20 @@
 ---
 
-- name: Install ntp
+- name: Install ntp pacakge
   package:
     name: ntp
     state: present
+  register: ntp_install_result
 
-- name: Enable ntp service
-  service:
-    name: ntp
-    enabled: yes
-    state: stopped
-
-- name: Force an immediate time sync
-  command: ntpdate pool.ntp.org
+- name: Force an immediate update on fresh installation
+  block:
+  - name: Stop ntp service
+    service:
+      name: ntp
+      state: stopped
+  - name: Update time
+    command: ntpdate pool.ntp.org
+  when: ntp_install_result.changed
 
 - name: Start ntp service
   service:
