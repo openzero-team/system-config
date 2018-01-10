@@ -1,26 +1,6 @@
 ---
 
 - block:
-  - name: "Install puppet agent"
-    package:
-      name: puppet
-      state: present
-  - service:
-      name: puppet
-      enabled: yes
-      state: started
-
-- name: "Modify /etc/hosts"
-  lineinfile:
-    dest: /etc/hosts
-    regexp: "^127.0.0.1.*$"
-    line: "127.0.0.1 {{ inventory_hostname }} localhost"
-
-- name: "Modify hostname"
-  hostname:
-    name: "{{ inventory_hostname }}"
-
-- block:
   - name: "Install puppet master"
     package:
       name: puppetmaster
