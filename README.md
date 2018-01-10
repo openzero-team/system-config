@@ -1,1 +1,1 @@
-Minimal system configuration of OpenStack CI infrastructure.
+Minimal system configuration of OpenZero CI infrastructure.
