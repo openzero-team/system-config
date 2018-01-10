@@ -75,8 +75,8 @@ class cibook_project::logstash_worker (
 
   validate_array($elasticsearch_nodes)  # needed by output.conf.erb
   class { '::logstash::indexer':
-    input_template         => 'openstack_project/logstash/input.conf.erb',
-    output_template        => 'openstack_project/logstash/output.conf.erb',
+    input_template         => 'cibook_project/logstash/input.conf.erb',
+    output_template        => 'cibook_project/logstash/output.conf.erb',
     require                => Logstash::Filter['openstack-logstash-filters'],
   }
 
