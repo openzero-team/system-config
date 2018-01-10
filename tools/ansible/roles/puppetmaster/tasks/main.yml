@@ -1,0 +1,44 @@
+---
+
+- block:
+  - name: "Install puppet agent"
+    package:
+      name: puppet
+      state: present
+  - service:
+      name: puppet
+      enabled: yes
+      state: started
+
+- block:
+  - name: "Install puppet master"
+    package:
+      name: puppetmaster
+      state: present
+  - service:
+      name: puppetmaster
+      enabled: yes
+      state: started
+
+- set_fact:
+    autosign: "{{ autosign }}"
+
+- name: "Enable cert auto-sign"
+  when:
+    - autosign
+  template:
+    src: autosign.conf.j2
+    dest: /etc/puppet/autosign.conf
+  no_log: yes
+  with_together:
+    - "{{ domainname }}"
+
+- name: "Modify puppet.conf"
+  template:
+    src: puppet.conf.j2
+    dest: /etc/puppet/puppet.conf
+  no_log: yes
+  with_together:
+    - "{{ inventory_hostname }}"
+  notify:
+    - Restart Puppet Master
