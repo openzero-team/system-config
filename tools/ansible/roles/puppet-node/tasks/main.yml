@@ -1,0 +1,20 @@
+---
+
+- name: Install ntp
+  package:
+    name: ntp
+    state: present
+
+- name: Enable ntp service
+  service:
+    name: ntp
+    enabled: yes
+    state: stopped
+
+- name: Force an immediate time sync
+  command: ntpdate pool.ntp.org
+
+- name: Start ntp service
+  service:
+    name: ntp
+    state: started
