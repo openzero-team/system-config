@@ -17,3 +17,4 @@ Vagrantfile
 .vagrant/
 manifests/local.pp
 *.retry
+.idea/
