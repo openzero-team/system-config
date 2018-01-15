@@ -13,12 +13,12 @@ node 'zookeeper.cibook.oz' {
   }
 
   # aviod the nodepoll and gerrit mysql db declaration conflict, delete the gerrit db temporarily.
-#  class { '::cibook_project::common_gerrit_db':
-#    mysql_root_password    => hiera('mysql_gerrit_root_password'),
-#    database_name          => hiera('mysql_gerrit_name'),
-#    database_user          => hiera('mysql_gerrit_user'),
-#    database_password      => hiera('mysql_gerrit_password'),
-#  }
+  # class { '::cibook_project::common_gerrit_db':
+  #   mysql_root_password => hiera('mysql_gerrit_root_password'),
+  #   database_name       => hiera('mysql_gerrit_name'),
+  #   database_user       => hiera('mysql_gerrit_user'),
+  #   database_password   => hiera('mysql_gerrit_password'),
+  # }
 
   class { 'zookeeper':
     install_java => true,
@@ -95,11 +95,11 @@ node 'log.cibook.oz' {
 node 'zuul.cibook.oz' {
   $vhost_name = hiera('vhost_name_zuul', $::fqdn)
 
-  class { '::openstackci::zuul_node':
+  class { '::cibook_project::zuul_node':
     vhost_name                  => $vhost_name,
     project_config_repo         => hiera('project_config_repo'),
     gearman_server              => hiera('gearman_server'),
-    gerrit_server               => hiera('gerrit_server', 'gerrit.cibook.com'),
+    gerrit_server               => hiera('gerrit_server'),
     gerrit_user                 => hiera('gerrit_user'),
     gerrit_user_http_passwd     => hiera('gerrit_user_http_passwd'),
     gerrit_user_ssh_public_key  => hiera('gerrit_user_ssh_public_key'),
@@ -113,7 +113,7 @@ node 'zuul.cibook.oz' {
     smtp_default_from           => hiera('smtp_default_from', "zuul@${vhost_name}"),
     smtp_default_to             => hiera('smtp_default_to', "zuul.reports@${vhost_name}"),
     zuul_revision               => hiera('zuul_revision', 'master'),
-    zuul_git_source_repo        => hiera('zuul_git_source_repo', 'http://opnfv.zte.com.cn/gerrit/openstack/zuul'),
+    zuul_git_source_repo        => hiera('zuul_git_source_repo'),
   }
 }
 

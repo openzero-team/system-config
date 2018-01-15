@@ -6,20 +6,20 @@ project_config_repo: http://opnfv.zte.com.cn/gerrit/infra/project-config
 
 #vhost_name:
 vhost_name_master:     master.cibook.oz
-vhost_name_gerrit:     gerrit.cibook.oz
+vhost_name_gerrit:     &vhost_name_gerrit gerrit.cibook.oz
 vhost_name_zuul:       zuul.cibook.oz
 vhost_name_jenkins:    jenkins.cibook.oz
 vhost_name_nodepool:   nodepool.cibook.oz
 vhost_name_mysql:      mysql.cibook.oz
 vhost_name_zookeeper:  zookeeper.cibook.oz
-vhost_name_gearman:    gearman.cibook.oz
-vhost_name_log_server: log.cibook.oz
+vhost_name_gearman:    &vhost_name_gearman gearman.cibook.oz
+vhost_name_log_server: &vhost_name_log_server log.cibook.oz
 vhost_name_elk:        elk.cibook.oz
 
 #serveradmin:
 jenkins_username: cibook
 jenkins_password: cibook
-jenkins_ssh_private_key: |
+jenkins_ssh_private_key: &jenkins_ssh_private_key |
   -----BEGIN RSA PRIVATE KEY-----
   MIIEogIBAAKCAQEAuWmUthLYDhvFvvz4xt4ax0w6WFlpeJz+fXCJ5vbfJmI8beNi
   8XdlflHCpbpEZ+9p06SpNwu4ImiwTBKvu41T7H0lTU5sMWKczzIgbyYfwwsUcVSu
@@ -48,22 +48,25 @@ jenkins_ssh_private_key: |
   DZZn3nzmfuMNLnZrbMAOA8JMSm/Rk+Ce9E4kWHnqqN9uDpncDVI=
   -----END RSA PRIVATE KEY-----
 
-jenkins_ssh_public_key: AAAAB3NzaC1yc2EAAAADAQABAAABAQC5aZS2EtgOG8W+/PjG3hrHTDpYWWl4nP59cInm9t8mYjxt42Lxd2V+UcKlukRn72nTpKk3C7giaLBMEq+7jVPsfSVNTmwxYpzPMiBvJh/DCxRxVK6SehVbWLKz3We+eV2Je8WtRGFoxrGoIMa9Q11Mx86ScKWVzqvJLO/dPAVZ6of84x8m9R68hj0sx5uvsq8XILsiOV+A71PAHCvRhwJ8kL1KkBvx/tgGBJAS/RoMQgXXSXneRYqh8mrGvOhouCYk3T1V3sXeCeJ9DUhvIleDWIC2qRg+u3S1NWjiX4+EiJWIvrbspZ9LlMbHysPdwKjYCHCY6f7QQScKnclR9n6V
+jenkins_ssh_public_key: &jenkins_ssh_public_key AAAAB3NzaC1yc2EAAAADAQABAAABAQC5aZS2EtgOG8W+/PjG3hrHTDpYWWl4nP59cInm9t8mYjxt42Lxd2V+UcKlukRn72nTpKk3C7giaLBMEq+7jVPsfSVNTmwxYpzPMiBvJh/DCxRxVK6SehVbWLKz3We+eV2Je8WtRGFoxrGoIMa9Q11Mx86ScKWVzqvJLO/dPAVZ6of84x8m9R68hj0sx5uvsq8XILsiOV+A71PAHCvRhwJ8kL1KkBvx/tgGBJAS/RoMQgXXSXneRYqh8mrGvOhouCYk3T1V3sXeCeJ9DUhvIleDWIC2qRg+u3S1NWjiX4+EiJWIvrbspZ9LlMbHysPdwKjYCHCY6f7QQScKnclR9n6V
 
-#gerrit_ssh_host_key:
-gerrit_user:
-gerrit_user_ssh_private_key: |
-                             -----BEGIN RSA PRIVATE KEY-----
-                             -----END RSA PRIVATE KEY-----
-gerrit_user_ssh_public_key: # only fill with the body of public key
-git_email:
-git_name:
-log_server: log.cibook.oz
+gearman_server: *vhost_name_gearman
+gerrit_server: *vhost_name_gerrit
+gerrit_user: cibook
+gerrit_user_ssh_private_key: *jenkins_ssh_private_key
+gerrit_user_ssh_public_key: *jenkins_ssh_public_key
+gerrit_user_http_passwd: cibook
+gerrit_ssh_host_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC6W1nqzmmQ42t9AIe9Kj+QFZftU/cml0ICT9MFQXmx8OAgxHwmZCQWDufv0EOD/Uw8vzxJO4Bs0QeYKkZXNGkDvGITLaMU46tG0LFC4pd2anN5RXoDu6LgFlFZPd348qPZbeyJF6VuQdrB2YJNZSFwGi0MFVkuHCr6nXPhOzwPzw==
+git_email: cibook@zte.com.cn
+git_name: cibook
+log_server: *vhost_name_log_server
+log_server_public: *vhost_name_log_server
 #smtp_host:
 #smtp_default_from:
 #smtp_default_to:
 zuul_revision:
-zuul_git_source_repo: # replace with local repo
+zuul_git_source_repo: http://opnfv.zte.com.cn/gerrit/openstack/zuul
+
 oscc_file_contents: |
   # Do Not Edit - Generated & Managed by Puppet
   #
@@ -127,7 +130,6 @@ nodepool_revision: dev
 nodepool_git_source_repo: http://opnfv.zte.com.cn/gerrit/openstack/nodepool
 
 domain: cibook.oz
-#jenkins_ssh_public_key:  your-jenkins-public-key-no-whitespace
 #swift_authurl:
 #swift_user:
 #swift_key:
