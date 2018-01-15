@@ -3,10 +3,8 @@ node 'gearman.cibook.oz' {
 }
 
 node 'zookeeper.cibook.oz' {
-  $vhost_name = hiera('vhost_name_common', $::fqdn)
-
   class { '::cibook_project::common_nodepool_db':
-    vhost_name              => $vhost_name,
+    vhost_name              => hiera('vhost_name_zookeeper', $::fqdn),
     mysql_bind_address      => hiera('mysql_bind_address'),
     mysql_root_password     => hiera('mysql_root_password'),
     mysql_nodepool_password => hiera('mysql_nodepool_password'),
@@ -29,7 +27,7 @@ node 'zookeeper.cibook.oz' {
 
 node 'gerrit.cibook.oz' {
 
-  $vhost_name = hiera('vhost_name_gerrit', $::fqdn)
+  $vhost_name_gerrit = hiera('vhost_name_gerrit', $::fqdn)
 
   package { 'ssl-cert':
     ensure => present,
@@ -47,9 +45,9 @@ node 'gerrit.cibook.oz' {
   class { 'gerrit':
     mysql_host                  => hiera('vhost_name_mysql'),
     mysql_password              => hiera('mysql_gerrit_password'),
-    vhost_name                  => $vhost_name,
+    vhost_name                  => $vhost_name_gerrit,
     redirect_to_canonicalweburl => false,
-    canonicalweburl             => "https://${vhost_name}",
+    canonicalweburl             => "https://${vhost_name_gerrit}",
     war                         => 'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.9.4.5.73392ca.war',
     gerrit_auth_type            => 'DEVELOPMENT_BECOME_ANY_ACCOUNT',
     manage_jeepyb               => false,
@@ -58,12 +56,12 @@ node 'gerrit.cibook.oz' {
 
 node 'jenkins.cibook.oz' {
 
-  $vhost_name = hiera('vhost_name_jenkins', $::fqdn)
+  $vhost_name_jenkins = hiera('vhost_name_jenkins', $::fqdn)
 
   class { '::openstackci::jenkins_node':
-    vhost_name              => $vhost_name,
+    vhost_name              => $vhost_name_jenkins,
     project_config_repo     => hiera('project_config_repo'),
-    serveradmin             => hiera('serveradmin', "webmaster@${vhost_name}"),
+    serveradmin             => hiera('serveradmin', "webmaster@${vhost_name_jenkins}"),
     jenkins_version         => hiera('jenkins_version', 'present'),
     jenkins_vhost_name      => hiera('jenkins_vhost_name', 'jenkins'),
     jenkins_username        => hiera('jenkins_username', 'jenkins'),
@@ -93,10 +91,10 @@ node 'log.cibook.oz' {
 }
 
 node 'zuul.cibook.oz' {
-  $vhost_name = hiera('vhost_name_zuul', $::fqdn)
+  $vhost_name_zuul = hiera('vhost_name_zuul', $::fqdn)
 
   class { '::cibook_project::zuul_node':
-    vhost_name                  => $vhost_name,
+    vhost_name                  => $vhost_name_zuul,
     project_config_repo         => hiera('project_config_repo'),
     gearman_server              => hiera('gearman_server'),
     gerrit_server               => hiera('gerrit_server'),
@@ -110,8 +108,8 @@ node 'zuul.cibook.oz' {
     log_server                  => hiera('log_server'),
     log_server_public           => hiera('log_server_public'),
     smtp_host                   => hiera('smtp_host', 'localhost'),
-    smtp_default_from           => hiera('smtp_default_from', "zuul@${vhost_name}"),
-    smtp_default_to             => hiera('smtp_default_to', "zuul.reports@${vhost_name}"),
+    smtp_default_from           => hiera('smtp_default_from', "zuul@${vhost_name_zuul}"),
+    smtp_default_to             => hiera('smtp_default_to', "zuul.reports@${vhost_name_zuul}"),
     zuul_revision               => hiera('zuul_revision', 'master'),
     zuul_git_source_repo        => hiera('zuul_git_source_repo'),
   }
@@ -120,10 +118,10 @@ node 'zuul.cibook.oz' {
 node 'nodepool.cibook.oz' {
 
     # If the fqdn is not resolvable, use its ip address
-  $vhost_name = hiera('vhost_name_nodepool', $::fqdn)
+  $vhost_name_nodepool = hiera('vhost_name_nodepool', $::fqdn)
 
   class { '::cibook_project::nodepool_node':
-    vhost_name               => $vhost_name,
+    vhost_name               => $vhost_name_nodepool,
     project_config_repo      => hiera('project_config_repo'),
     jenkins_username         => hiera('jenkins_username', 'jenkins'),
     jenkins_ssh_public_key   => hiera('jenkins_ssh_public_key'),
