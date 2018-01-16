@@ -1,14 +1,15 @@
----
+  ---
 
 - block:
   - name: "Install puppet agent"
     package:
       name: puppet
       state: present
+  # disable scheduled service, puppet agent will be triggered by CI job
   - service:
       name: puppet
-      enabled: yes
-      state: started
+      enabled: no
+      state: stopped
 
 - name: "Modify puppet.conf"
   template:
@@ -22,7 +23,7 @@
 - name: "Enable puppet agent"
   shell: /usr/bin/puppet agent --enable --verbose
 
-- name: "Start puppet agent"
+- name: "Run puppet agent on demand"
   # https://docs.puppet.com/puppet/3/man/agent.html
   # With --detailed-exitcodes, an exit code of '2' means there were changes.
   shell: /usr/bin/puppet agent --test --verbose --detailed-exitcodes
