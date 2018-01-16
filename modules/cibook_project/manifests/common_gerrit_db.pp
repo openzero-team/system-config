@@ -10,10 +10,10 @@ class cibook_project::common_gerrit_db (
 
 ) {
 
- class { '::gerrit::mysql' :
-      mysql_root_password => $mysql_root_password,
-      database_name       => $database_name,
-      database_user       => $database_user,
-      database_password   => $database_password,
+class { '::gerrit::mysql' :
+    mysql_root_password => $mysql_root_password,
+    database_name       => $database_name,
+    database_user       => $database_user,
+    database_password   => $database_password,
   }
 }

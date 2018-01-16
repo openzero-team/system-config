@@ -10,7 +10,7 @@ class cibook_project::nodepool_node (
   # Nodepool configurations
   $oscc_file_contents            = undef,
   $mysql_host                    = undef,
-  $mysql_db_name                 = "nodepool",
+  $mysql_db_name                 = 'nodepool',
   $mysql_root_password           = undef,
   $mysql_nodepool_password       = undef,
   $nodepool_jenkins_target       = undef,
@@ -24,7 +24,7 @@ class cibook_project::nodepool_node (
 
   class { '::openstackci::nodepool':
     mysql_host                => $mysql_host,
-    mysql_db_name            => $mysql_db_name,
+    mysql_db_name             => $mysql_db_name,
     mysql_root_password       => $mysql_root_password,
     mysql_password            => $mysql_nodepool_password,
     nodepool_ssh_private_key  => $jenkins_ssh_private_key,
