@@ -55,11 +55,10 @@ node 'gerrit.cibook.oz' {
 }
 
 node 'jenkins.cibook.oz' {
+  $vhost_name = hiera('vhost_name_jenkins', $::fqdn)
 
-  $vhost_name_jenkins = hiera('vhost_name_jenkins', $::fqdn)
-
-  class { '::openstackci::jenkins_node':
-    vhost_name              => $vhost_name_jenkins,
+  class { '::cibook_project::jenkins_node':
+    vhost_name              => $vhost_name,
     project_config_repo     => hiera('project_config_repo'),
     serveradmin             => hiera('serveradmin', "webmaster@${vhost_name_jenkins}"),
     jenkins_version         => hiera('jenkins_version', 'present'),
@@ -68,13 +67,12 @@ node 'jenkins.cibook.oz' {
     jenkins_password        => hiera('jenkins_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key'),
     jenkins_ssh_public_key  => hiera('jenkins_ssh_public_key'),
+    jenkins_credential      => hiera('jenkins_credentials_id'),
     log_server              => hiera('log_server'),
     jjb_git_revision        => hiera('jjb_git_revision', '1.6.2'),
-    jjb_git_url             => hiera('jjb_git_url',
-      'https://git.openstack.org/openstack-infra/jenkins-job-builder'),
+    jjb_git_url             => hiera('jjb_git_url', 'https://git.openstack.org/openstack-infra/jenkins-job-builder'),
     java_args_override      => hiera('java_args_override', '-Dhudson.model.ParametersAction.keepUndefinedParameters=true -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai') # lint:ignore:140chars
   }
-
 }
 
 node 'log.cibook.oz' {
