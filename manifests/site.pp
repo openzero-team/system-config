@@ -152,11 +152,7 @@ node 'elk.cibook.oz' {
   }
 
   class { 'cibook_project::logstash_worker':
-    discover_node         => hiera('vhost_name_elk'),
-    enable_mqtt           => false,
-    mqtt_hostname         => hiera('vhost_name_elk'),
-    mqtt_password         => '',
-    mqtt_ca_cert_contents => '',
+    discover_node         => hiera('vhost_name_elk')
   }
 
   class { 'cibook_project::elasticsearch_node':

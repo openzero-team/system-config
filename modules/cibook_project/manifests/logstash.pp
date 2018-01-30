@@ -16,7 +16,6 @@
 #
 class cibook_project::logstash (
   $discover_nodes ,
-  $statsd_host = '',
 ) {
   class { 'logstash::web':
     frontend            => 'kibana',
@@ -28,7 +27,6 @@ class cibook_project::logstash (
 
   class { 'log_processor::client':
     config_file => 'puppet:///modules/cibook_project/logstash/jenkins-log-client.yaml',
-    statsd_host => $statsd_host,
   }
 
 }

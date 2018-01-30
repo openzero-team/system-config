@@ -18,13 +18,6 @@ class cibook_project::logstash_worker (
   $discover_node, # e.g. elasticsearch01.openstack.org
   $filter_rev    = 'master',
   $filter_source = 'https://git.openstack.org/openstack-infra/logstash-filters',
-  $enable_mqtt = true,
-  $mqtt_hostname = '', # e.g. firehose.openstack.org
-  $mqtt_port = 8883,
-  $mqtt_topic = "logstash/${::hostname}",
-  $mqtt_username = 'infra',
-  $mqtt_password = undef,
-  $mqtt_ca_cert_contents = undef,
 ) {
 
   file { '/etc/logprocessor/worker.yaml':
@@ -61,16 +54,6 @@ class cibook_project::logstash_worker (
       Vcsrepo['/opt/logstash-filters'],
     ],
     notify  => Service['logstash'],
-  }
-
-  file { '/etc/logstash/mqtt-root-CA.pem.crt':
-      ensure  => present,
-      content => $mqtt_ca_cert_contents,
-      replace => true,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0555',
-      require => Class['::logstash'],
   }
 
   validate_array($elasticsearch_nodes)  # needed by output.conf.erb
