@@ -148,11 +148,11 @@ node 'elk.cibook.oz' {
   $elasticsearch_nodes = [ hiera('vhost_name_elk') ]
 
   class { 'cibook_project::logstash':
-    discover_nodes      => [ "hiera('vhost_name_elk'):9200" ]
+    discover_nodes => [ "hiera('vhost_name_elk'):9200" ]
   }
 
   class { 'cibook_project::logstash_worker':
-    discover_node         => hiera('vhost_name_elk')
+    discover_node => hiera('vhost_name_elk')
   }
 
   class { 'cibook_project::elasticsearch_node':

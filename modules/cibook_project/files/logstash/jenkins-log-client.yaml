@@ -4,6 +4,9 @@ source-url: http://log.cibook.oz
 zmq-publishers:
   - tcp://jenkins.cibook.oz:8888
 
+subunit-files: []
+
+# List of files to source logs from.
 source-files:
   - name: console.html
     retry-get: True
