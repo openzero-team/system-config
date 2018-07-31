@@ -12,9 +12,3 @@ source-files:
     retry-get: True
     tags:
       - console
-  - name: logs/syslog.txt
-    tags:
-      - syslog
-  - name: logs/libvirtd.txt
-    tags:
-      - libvirt
