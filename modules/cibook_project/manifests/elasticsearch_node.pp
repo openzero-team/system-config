@@ -16,7 +16,7 @@
 #
 class cibook_project::elasticsearch_node (
   $discover_nodes = ['localhost'],
-  $heap_size = '10g',
+  $heap_size = '4g',
 ) {
   class { 'logstash::elasticsearch': }
 
